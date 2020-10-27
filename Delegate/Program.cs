@@ -89,6 +89,26 @@ namespace Delegate
             Func<int, int, int> myFuncC = (int nbrA, int nbrB) => { return nbrA + nbrB; };
             Console.WriteLine(myFuncC(110, 220));
 
+            Console.WriteLine("===============================================================================");
+            // Via Predicate<> pour Appel méthode NbrPlusPetitQueDix de la classe MaClass
+            Predicate<int> myPredicateA = MaClass.NbrPlusPetitQueDix;
+            Console.WriteLine(myPredicateA(15));
+
+            // Via Func<> pour Appel via méthode anonyme
+            Predicate<int> myPredicateB = delegate (int val)
+            {
+                if (val == 1) return false;
+                else return true;
+            };
+            Console.WriteLine(myPredicateB(5));
+
+            // Via Func<> pour Appel via méthode anonyme expression Lambda
+            Predicate<int> myPredicateC = (int val) =>
+            {
+                if (val == 1) return false;
+                else return true;
+            };
+            Console.WriteLine(myPredicateC(20));
 
 
             Console.ReadKey();
@@ -110,6 +130,12 @@ namespace Delegate
         public static int CalculEntier(int nbrA, int nbrB)
         {
             return nbrA + nbrB;
+        }
+
+        public static bool NbrPlusPetitQueDix(int nbrA)
+        {
+            if (nbrA < 10) return true;
+            else return false;
         }
     }
 }
